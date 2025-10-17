@@ -110,7 +110,7 @@
   <div class="container" id="gallery">
     <!-- Cards serão inseridos aqui via JS -->
   </div>
-
+  <h1 align="center">Vou te amar até a ultima rosa morrer!</h1>
   <div class="container">
     <div class="timer-box">
       <div class="timer-title">Te amo desde 09/10/2024 às 22:21</div>
@@ -150,8 +150,12 @@
         title: '13 de Outubro às 19:09',
         description: 'Foto com as tiaras de papai noel que achamos na loja, depois de andar a loja inteira olhando e conhecendo e comprando coisinhas aleatórias!',
       },
+      {
+        image: './src/foto7.jpeg',
+        title: '17 de Outubro',
+        description: 'Dia de te entrega-las, sei o quão importante são para você e o que significa, eu que fiz, com todo amor, espero que goste!',
+      },
     ];
-
     const gallery = document.getElementById('gallery');
 
     galleryItems.forEach(item => {
@@ -181,8 +185,7 @@
 
       gallery.appendChild(card);
     });
-
-    // Timer
+    
     const timerElement = document.getElementById('timer');
     const startDate = new Date(2025, 9, 9, 22, 21); // 09/10/2024 às 22:21
 
