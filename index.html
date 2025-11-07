@@ -88,6 +88,40 @@
       font-weight: bold;
     }
 
+    /* 🔹 Novo botão */
+    .love-button {
+      display: block;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      margin: 20px auto;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .love-button:hover {
+      background-color: #0088cc;
+    }
+
+    /* 🔹 Nova seção do Spotify */
+    .spotify-section {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .spotify-card {
+      background-color: var(--card-color);
+      border-radius: 12px;
+      padding: 16px;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
     @media (max-width: 600px) {
       .card {
         flex-direction: column;
@@ -107,16 +141,71 @@
 <body>
   <header>Nosso Tempo Juntos</header>
 
-  <div class="container" id="gallery">
-    <!-- Cards serão inseridos aqui via JS -->
-  </div>
+  <div class="container" id="gallery"></div>
+
   <h1 align="center">Vou te amar até a ultima rosa morrer!</h1>
+
+  <!-- 🔹 Botão para abrir a seção do Spotify -->
+  <button class="love-button" id="openSpotifyBtn">Nossa Música 💙</button>
+
   <div class="container">
     <div class="timer-box">
-      <div class="timer-title">Te amo desde 09/10/2024 às 22:21</div>
+      <div class="timer-title">Te amo desde 09/10/2025 às 22:21</div>
       <div class="timer" id="timer">0d 0h 0m 0s</div>
     </div>
   </div>
+
+  <!-- 🔹 Nova tela do Spotify -->
+  <div class="spotify-section" id="spotifySection">
+  <div class="spotify-card">
+    <h2 style="color: var(--primary-color);">Nosso Tempo Juntos</h2>
+    <!-- Card do Spotify incorporado -->
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6JKkP9ABQzYZUFSKSVDKIc?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <div style="margin-top: 20px; text-align: center;">
+      <img src="./src/foto9.jpeg" 
+           alt="Nossa foto" 
+           style="width: 100%; max-width: 300px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+    </div>
+
+    <!-- Carta de amor -->
+    <div style="margin-top: 20px; text-align: left;">
+      <h3 style="color: var(--primary-color); text-align: center;">Minha princesa 💌</h3>
+      <p style="line-height: 1.6; font-size: 15px;">
+        Hoje se completa 1 mês de que a minha vida ganhou muito mais sentido! Eu nem sei direito por onde começar, mas acho que o jeito é só falar o que vem do coração mesmo.  
+        Desde que você entrou na minha vida, tudo ficou diferente — mais leve, mais bonito, mais cheio de sentido.  
+        É estranho pensar em como alguém pode mudar tanto a gente só por estar perto.  
+        <br><br>
+        Eu gosto de te ver sorrindo, gosto do som da tua voz, do jeito que você fala, até das suas manias.  
+        Gosto de tudo em você. E é aí que percebo: não é só um “gostar” qualquer… é aquele tipo de sentimento que não dá pra explicar, só sentir.  
+        <br><br>
+        Você me faz querer ser uma pessoa melhor, me faz acreditar que o amor de verdade existe,  
+        aquele que a gente vê em filme e acha que nunca vai viver.  
+        Mas eu vivo, todo dia, quando tô contigo.  
+        <br><br>
+        Não prometo ser perfeito, porque ninguém é, mas eu prometo te amar de verdade, cuidar de você,  
+        te respeitar e estar aqui, sempre — nos dias bons, nos ruins,  
+        nos que a gente ri até a barriga doer e nos que o mundo parece pesado demais.  
+        <br><br>
+        Te amo mais do que consigo colocar em palavras, e talvez essa seja a parte mais bonita disso tudo.  
+        <br><br>
+        Com todo meu amor,  
+        <br>
+        <strong>Gabriel 💙</strong>
+      </p>
+    </div>
+
+    <!-- Versículo -->
+    <div style="margin-top: 30px; text-align: center; font-style: italic;">
+      <p style="color: var(--primary-color); font-weight: bold;">"O amor é paciente, o amor é bondoso.  
+      Não inveja, não se vangloria, não se orgulha."</p>
+      <p style="color: var(--text-color);">— 1 Coríntios 13:4</p>
+    </div>
+
+    <!-- Botão Voltar -->
+    <button class="love-button" id="backBtn">Voltar</button>
+  </div>
+</div>
 
   <script>
     const galleryItems = [
@@ -161,8 +250,8 @@
         description: 'Só pra te lembrar do quanto você é especial para mim, e o quanto eu te amo!',
       },
     ];
-    const gallery = document.getElementById('gallery');
 
+    const gallery = document.getElementById('gallery');
     galleryItems.forEach(item => {
       const card = document.createElement('div');
       card.className = 'card';
@@ -187,12 +276,11 @@
 
       card.appendChild(img);
       card.appendChild(content);
-
       gallery.appendChild(card);
     });
-    
+
     const timerElement = document.getElementById('timer');
-    const startDate = new Date(2025, 9, 9, 22, 21); // 09/10/2024 às 22:21
+    const startDate = new Date(2025, 9, 9, 22, 21); 
 
     function updateTimer() {
       const now = new Date();
@@ -208,6 +296,22 @@
 
     updateTimer();
     setInterval(updateTimer, 1000);
+
+    // 🔹 Script para alternar entre telas
+    const spotifySection = document.getElementById('spotifySection');
+    const openSpotifyBtn = document.getElementById('openSpotifyBtn');
+    const backBtn = document.getElementById('backBtn');
+    const mainContent = document.querySelectorAll('header, .container, h1, #openSpotifyBtn');
+
+    openSpotifyBtn.addEventListener('click', () => {
+      mainContent.forEach(el => el.style.display = 'none');
+      spotifySection.style.display = 'block';
+    });
+
+    backBtn.addEventListener('click', () => {
+      mainContent.forEach(el => el.style.display = '');
+      spotifySection.style.display = 'none';
+    });
   </script>
 </body>
 </html>
