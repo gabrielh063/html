@@ -146,7 +146,7 @@
   <h1 align="center">Vou te amar até a ultima rosa morrer!</h1>
 
   <!-- 🔹 Botão para abrir a seção do Spotify -->
-  <button class="love-button" id="openSpotifyBtn">Nossa Música 💙</button>
+  <button class="love-button" id="openSpotifyBtn">aperta o butao</button>
 
   <div class="container">
     <div class="timer-box">
@@ -280,22 +280,50 @@
     });
 
     const timerElement = document.getElementById('timer');
-    const startDate = new Date(2025, 9, 9, 22, 21); 
+    const startDate = new Date(2025, 9, 9, 22, 21); // 09/10/2025 às 22:21
 
     function updateTimer() {
       const now = new Date();
       const diff = now - startDate;
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      // Calcula tempo total em segundos
+      const totalSeconds = Math.floor(diff / 1000);
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const totalHours = Math.floor(totalMinutes / 60);
+      const totalDays = Math.floor(totalHours / 24);
+
+      // 🔹 Cálculo de meses completos e dias restantes
+      let months = (now.getFullYear() - startDate.getFullYear()) * 12;
+      months += now.getMonth() - startDate.getMonth();
+
+      // Se ainda não chegou ao mesmo dia do mês, o mês não completou
+      if (now.getDate() < startDate.getDate()) {
+        months -= 1;
+      }
+
+      // 🔹 Calcula quantos dias se passaram desde o último “dia 9”
+      const lastMonthDate = new Date(startDate);
+      lastMonthDate.setMonth(startDate.getMonth() + months);
+      const daysSinceLastMonth = Math.floor((now - lastMonthDate) / (1000 * 60 * 60 * 24));
+
+      // 🔹 Cálculo padrão de horas, minutos e segundos
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      // 🔹 Exibe o texto formatado (sem mostrar “0m”)
+      let timeText = "";
+      if (months > 0) {
+        timeText += `${months}m `;
+      }
+
+      timeText += `${daysSinceLastMonth}d ${hours}h ${minutes}m ${seconds}s`;
+      timerElement.textContent = timeText;
     }
 
     updateTimer();
-    setInterval(updateTimer, 1000);
+setInterval(updateTimer, 1000);
+
 
     // 🔹 Script para alternar entre telas
     const spotifySection = document.getElementById('spotifySection');
